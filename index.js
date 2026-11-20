@@ -18,6 +18,18 @@ import fs from 'fs';
   const populateTables = fs.readFileSync('populate-tables.sql', 'utf8');
   await db.exec(populateTables);
 
+  // Alter the existing cars table
+  const alterTable = fs.readFileSync('alter-table.sql', 'utf-8');
+  await db.exec(alterTable);
+
+  // Insert new data to the tables
+  const insertNewData = fs.readFileSync('insert-new-data.sql', 'utf-8');
+  await db.exec(insertNewData);
+
+  // Alter constraints dropping NOT NULL
+  const alterConstraints = fs.readFileSync('alter-constraints.sql', 'utf-8');
+  await db.exec(alterConstraints);
+
   // Load the SQL query file
   const query = fs.readFileSync('query.sql', 'utf8');
 
